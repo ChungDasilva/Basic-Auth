@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var username = "chungdasilva";
+	var password = "asdf1234";  
+
+	function make_base_auth(user, password) {
+	  var tok = user + ':' + password;
+	  var hash = btoa(tok);
+	  return "Basic " + hash;
+	}
+
+	$.ajax
+	  ({
+	    type: "GET",
+	    url: "basic-auth.php",
+	    dataType: 'text',
+	    async: false,
+	    data: '{}',
+	    beforeSend: function (xhr){ 
+	        xhr.setRequestHeader('Authorization', make_base_auth(username, password)); 
+	    },
+	    success: function (data){
+	    	console.log(data);
+	        alert('Thanks for your comment!'); 
+	    }
+	});
+</script>
+</body>
+</html>
